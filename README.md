@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Description:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-  In this task, you will build a simple content management application. The type of content doesn't matter. It could be a technical blog, tutorial, post, or personal blog. A user should be able to post, modify or remove that content. All the content will be displayed on the home page as a card with a short description. A reader can click on the content and read it in detail.
 
-## Available Scripts
+## Tech Stack (Required) :
 
-In the project directory, you can run:
+-  React
 
-### `npm start`
+-  Redux + React Redux (Old Redux)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-  Redux Thunk
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-  Redux Dev Tools
 
-### `npm test`
+## Tasks:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Admin Part
 
-### `npm run build`
+-  Admin should be able to post, update and delete content.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### User Part
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`Home Page:`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-  Users can sort the contents based on date/time.
 
-### `npm run eject`
+-  There would be 2 options
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   -  1. Sort by last upload,
+   -  2. Sort by the first upload.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-  Each content card should have multiple tags related to that topic, by clicking that tag the content card should rearrange (Get filtered).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`Reading history`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-  After clicking on each content, a reading history should be generated on the "Reading History" page.
 
-## Learn More
+-  Previously read content should be on this page, however, if a user clicks on already read content, then that particular content should move to the top of the page. (same content cannot be repeated on this list).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Note:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-  You do not need to implement user authentication as we have yet to cover this topic.
 
-### Code Splitting
+-  All data must be loaded from the server. You can use the Moon-tech server (Modify it if you need.) You have to host the server and connect the live link to your application.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-  You do not need to save the "Reading History" page's data locally or on the server. There is no problem if the data goes away after reloading the page.`
 
-### Analyzing the Bundle Size
+-  You need to use the specific action names mention below for thunk-actions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+-  You must integrate Redux Dev Tool. (This is important for cross-checking your assignment.)
 
-### Making a Progressive Web App
+## `Thunk Actions`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-  ADD_CONTENT
 
-### Advanced Configuration
+-  GET_CONTENT
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-  UPDATE_CONTENT
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-  DELETE_CONTENT
