@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Main = () => {
-   return <section></section>;
+   const { test } = useSelector((state) => state.blogs);
+   //    console.log(state);
+   return <section>{test}</section>;
 };
 
 export default Main;
