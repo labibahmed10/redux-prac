@@ -1,9 +1,21 @@
+import { GET_CONTENT } from "../actionTypes/blogActionTypes";
+
 const initialState = {
-   test: "redux is integrated",
+   loading: false,
+   blogs: [],
 };
 
 const blogReducer = (state = initialState, action) => {
-   return state;
+   switch (action.type) {
+      case GET_CONTENT:
+         return {
+            ...state,
+            blogs: [...action.payload],
+         };
+
+      default:
+         return state;
+   }
 };
 
 export default blogReducer;

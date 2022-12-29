@@ -3,7 +3,7 @@ import Navbar from "./Layout/Navbar/Navbar";
 
 function App() {
    return (
-      <main className="max-w-7xl mx-auto m-2">
+      <main className="max-w-screen-xl mx-auto m-2">
          <Navbar />
          <Outlet />
       </main>
