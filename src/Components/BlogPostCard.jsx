@@ -6,7 +6,7 @@ const BlogPostCard = ({ blog }) => {
    const date = new Date(blog?.seen).toDateString();
 
    return (
-      <div className="shadow-xl rounded-3xl flex flex-col text-[#445045] bg-[#c5e0dc]">
+      <div className="shadow-xl rounded-3xl flex flex-col text-[#445045] bg-[#c5e0dc] h-full">
          <div className="w-full">
             <img
                src={blog.image}

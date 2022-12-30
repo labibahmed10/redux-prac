@@ -4,24 +4,34 @@ import BlogPostCard from "../../Components/BlogPostCard";
 import { filterByOption, filterByTags } from "../../redux/action/filterActionFunc";
 
 const Main = () => {
-   const blogs = useSelector((state) => state.blogs.blogs);
-   const state = useSelector((state) => state.filter);
+   const blogs = useSelector((state) => state?.blogs?.blogs);
+   const state = useSelector((state) => state?.filter);
    console.log(state);
    const dispatch = useDispatch();
 
    // active css
    const webdev = `px-3 py-1 rounded-full text-white ${
-      state.filterBy.includes("webdev") ? "bg-[#445045]" : "bg-[#9ED5CB]"
+      state?.filterBy.includes("Web Development") ? "bg-[#445045]" : "bg-[#9ED5CB]"
    }`;
    const programming = `px-3 py-1 rounded-full text-white ${
-      state.filterBy.includes("programming") ? "bg-[#445045]" : "bg-[#9ED5CB]"
+      state?.filterBy.includes("Programming") ? "bg-[#445045]" : "bg-[#9ED5CB]"
    }`;
    const resume = `px-3 py-1 rounded-full text-white ${
-      state.filterBy.includes("resume") ? "bg-[#445045]" : "bg-[#9ED5CB]"
+      state?.filterBy.includes("Resume") ? "bg-[#445045]" : "bg-[#9ED5CB]"
    }`;
    const github = `px-3 py-1 rounded-full text-white ${
-      state.filterBy.includes("github") ? "bg-[#445045]" : "bg-[#9ED5CB]"
+      state?.filterBy.includes("Github") ? "bg-[#445045]" : "bg-[#9ED5CB]"
    }`;
+
+   let except = blogs
+      .filter((blog) =>
+         state?.filterBy.length > 0 ? state?.filterBy?.includes(...blog?.tags) : blog,
+      )
+      .sort((a, b) => {
+         return new Date(a?.seen) - new Date(b?.seen);
+      })
+      .map((blog) => <BlogPostCard key={blog?._id} blog={blog} />);
+   console.log(except);
 
    return (
       <>
@@ -31,7 +41,7 @@ const Main = () => {
                   className="focus:outline-0 bg-gray-100 border border-gray-300 rounded-lg p-2"
                   name="Newest"
                   id="new"
-                  onChange={(e) => dispatch(filterByOption())}
+                  onChange={() => dispatch(filterByOption())}
                >
                   <option className="text-lg mx-5" value="Newest">
                      Newest First
@@ -44,25 +54,25 @@ const Main = () => {
                <div className="flex justify-center items-center gap-3">
                   <p className="text-lg font-semibold">Filter By :</p>
                   <button
-                     onClick={() => dispatch(filterByTags("webdev"))}
+                     onClick={() => dispatch(filterByTags("Web Development"))}
                      className={webdev}
                   >
                      Web Development
                   </button>
                   <button
-                     onClick={() => dispatch(filterByTags("programming"))}
+                     onClick={() => dispatch(filterByTags("Programming"))}
                      className={programming}
                   >
                      Programming
                   </button>
                   <button
-                     onClick={() => dispatch(filterByTags("resume"))}
+                     onClick={() => dispatch(filterByTags("Resume"))}
                      className={resume}
                   >
                      Resume
                   </button>
                   <button
-                     onClick={() => dispatch(filterByTags("github"))}
+                     onClick={() => dispatch(filterByTags("Github"))}
                      className={github}
                   >
                      Github
@@ -72,9 +82,16 @@ const Main = () => {
          </section>
 
          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center gap-10 my-20">
-            {blogs.map((blog) => (
-               <BlogPostCard key={blog?._id} blog={blog} />
-            ))}
+            {blogs
+               .filter((blog) =>
+                  state?.filterBy.length > 0
+                     ? state?.filterBy?.includes(...blog?.tags)
+                     : blog,
+               )
+               .sort((a, b) => state?.status && new Date(b?.seen) - new Date(a?.seen))
+               .map((blog) => (
+                  <BlogPostCard key={blog?._id} blog={blog} />
+               ))}
          </section>
       </>
    );
