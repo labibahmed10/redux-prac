@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BlogPostCard from "../../Components/BlogPostCard";
 import { filterByOption, filterByTags } from "../../redux/action/filterActionFunc";
 
-const Main = () => {
+const Home = () => {
    const dispatch = useDispatch();
 
    const blogs = useSelector((state) => state?.blogs?.blogs);
@@ -87,4 +87,4 @@ const Main = () => {
    );
 };
 
-export default Main;
+export default Home;

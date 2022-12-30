@@ -10,7 +10,7 @@ const Navbar = () => {
          <ul className="flex items-center gap-8">
             <li>
                <NavLink
-                  to="home"
+                  to="/home"
                   className={({ isActive }) =>
                      isActive
                         ? "bg-[#9ED5CB] px-3 py-2 rounded-2xl text-[#445045] font-bold"
@@ -22,7 +22,7 @@ const Navbar = () => {
             </li>
             <li>
                <NavLink
-                  to="readingHistory"
+                  to="/readingHistory"
                   className={({ isActive }) =>
                      isActive
                         ? "bg-[#9ED5CB] px-3 py-2 rounded-2xl text-[#445045] font-bold"
@@ -30,6 +30,18 @@ const Navbar = () => {
                   }
                >
                   Reading History
+               </NavLink>
+            </li>
+            <li>
+               <NavLink
+                  to="/admin"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "bg-[#9ED5CB] px-3 py-2 rounded-2xl text-[#445045] font-bold"
+                        : "font-bold text-[#445045]"
+                  }
+               >
+                  Admin Dashboard
                </NavLink>
             </li>
          </ul>

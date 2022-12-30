@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import BlogUploadForm from "../Components/BlogUploadForm";
+import AdminPage from "../Layout/Admin/AdminPage";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
-import Main from "../Pages/Main/Main";
+import Home from "../Pages/Home/Home";
 import ReadingHistory from "../Pages/ReadingHistory/ReadingHistory";
 
 const routes = createBrowserRouter([
@@ -11,19 +13,29 @@ const routes = createBrowserRouter([
       children: [
          {
             path: "/",
-            element: <Main />,
+            element: <Home />,
          },
          {
-            path: "home",
-            element: <Main />,
+            path: "/home",
+            element: <Home />,
          },
          {
-            path: "blog/:id",
+            path: "/blog/:id",
             element: <BlogDetails />,
          },
          {
-            path: "readingHistory",
+            path: "/readingHistory",
             element: <ReadingHistory />,
+         },
+         {
+            path: "/admin",
+            element: <AdminPage />,
+            children: [
+               {
+                  path: "/admin",
+                  element: <BlogUploadForm />,
+               },
+            ],
          },
       ],
    },
