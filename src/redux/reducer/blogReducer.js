@@ -1,9 +1,8 @@
-import { GET_BY_ID, GET_CONTENT } from "../actionTypes/blogActionTypes";
+import { GET_CONTENT } from "../actionTypes/allActionTypes";
 
 const initialState = {
    loading: false,
    blogs: [],
-   blog: "",
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -12,12 +11,6 @@ const blogReducer = (state = initialState, action) => {
          return {
             ...state,
             blogs: [...action.payload],
-         };
-
-      case GET_BY_ID:
-         return {
-            ...state,
-            blog: action.payload,
          };
 
       default:
