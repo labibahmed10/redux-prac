@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BlogDetails = () => {
    const { id } = useParams();
+   const navigate = useNavigate();
    const blog = useSelector((state) => state?.blogs?.blogs).find((blo) => blo._id === id);
    const date = new Date(blog?.seen).toDateString();
 
@@ -17,8 +18,9 @@ const BlogDetails = () => {
 
          <h1 className="text-3xl pt-3">{blog?.title}</h1>
 
-         <div className="py-3 px-2 flex justify-between items-center">
+         <div className="py-3 flex justify-between items-center">
             <ul className="flex items-center gap-3">
+               <p className="text-2xl font-semibold">Tags: </p>{" "}
                {blog?.tags?.map((tag, i) => (
                   <li
                      key={i}
@@ -33,7 +35,14 @@ const BlogDetails = () => {
             </p>
          </div>
 
-         <h2 className="text-xl mt-10">{blog?.text}</h2>
+         <h2 className="text-xl mt-6">{blog?.text}</h2>
+
+         <button
+            onClick={() => navigate("/home")}
+            className="px-5 py-3 bg-[#445045] text-white rounded-full font-semibold mt-4"
+         >
+            Back to Home
+         </button>
       </article>
    );
 };

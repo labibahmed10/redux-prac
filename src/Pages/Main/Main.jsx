@@ -4,10 +4,10 @@ import BlogPostCard from "../../Components/BlogPostCard";
 import { filterByOption, filterByTags } from "../../redux/action/filterActionFunc";
 
 const Main = () => {
+   const dispatch = useDispatch();
+
    const blogs = useSelector((state) => state?.blogs?.blogs);
    const state = useSelector((state) => state?.filter);
-   console.log(state);
-   const dispatch = useDispatch();
 
    // active css
    const webdev = `px-3 py-1 rounded-full text-white ${
@@ -22,16 +22,6 @@ const Main = () => {
    const github = `px-3 py-1 rounded-full text-white ${
       state?.filterBy.includes("Github") ? "bg-[#445045]" : "bg-[#9ED5CB]"
    }`;
-
-   let except = blogs
-      .filter((blog) =>
-         state?.filterBy.length > 0 ? state?.filterBy?.includes(...blog?.tags) : blog,
-      )
-      .sort((a, b) => {
-         return new Date(a?.seen) - new Date(b?.seen);
-      })
-      .map((blog) => <BlogPostCard key={blog?._id} blog={blog} />);
-   console.log(except);
 
    return (
       <>

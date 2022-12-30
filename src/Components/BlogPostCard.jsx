@@ -1,9 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { showByReadingHistory } from "../redux/action/blogActionFunc";
 
 const BlogPostCard = ({ blog }) => {
    const location = useNavigate();
+   const dispatch = useDispatch();
    const date = new Date(blog?.seen).toDateString();
+
+   const handleReadingHistory = (_id, blog) => {
+      location(`/blog/${_id}`);
+      dispatch(showByReadingHistory(blog));
+   };
 
    return (
       <div className="shadow-xl rounded-3xl flex flex-col text-[#445045] bg-[#c5e0dc] h-full">
@@ -30,7 +38,7 @@ const BlogPostCard = ({ blog }) => {
          <p className="text-justify font-semibold px-3 py-1">
             {`${blog?.text?.slice(0, 200)}....`}
             <span
-               onClick={() => location(`/blog/${blog?._id}`)}
+               onClick={() => handleReadingHistory(blog?._id, blog)}
                className="px-4 py-1 rounded-full leading-8 bg-[#445045] text-white cursor-pointer inline-block mt-3"
             >
                Read More
