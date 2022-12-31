@@ -1,19 +1,21 @@
 import React from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentUpdate } from "react-icons/gr";
-import { useSelector } from "react-redux";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const BlogUploadForm = () => {
+const ManageAllBlogs = () => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
    const blogs = useSelector((state) => state?.blogs?.blogs);
-   console.log(blogs);
-   //    const date = new Date(blogs?.seen);
-
    let date;
+
    return (
       <div className="overflow-auto shadow-md rounded-lg">
          <table className="w-full text-sm text-left text-white">
             <thead className="uppercase bg-[#445045]">
-               <tr className="">
+               <tr>
                   <th scope="col" className="py-5 px-6">
                      Blog Title
                   </th>
@@ -47,4 +49,4 @@ const BlogUploadForm = () => {
    );
 };
 
-export default BlogUploadForm;
+export default ManageAllBlogs;

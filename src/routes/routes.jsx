@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import BlogUploadForm from "../Components/BlogUploadForm";
+import BlogUploadForm from "../Components/BlogUploadEditForm";
 import AdminPage from "../Layout/Admin/AdminPage";
+import ManageAllBlogs from "../Pages/AdminPages/ManageAllBlogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import Home from "../Pages/Home/Home";
 import ReadingHistory from "../Pages/ReadingHistory/ReadingHistory";
@@ -34,6 +35,17 @@ const routes = createBrowserRouter([
                {
                   path: "/admin",
                   element: <BlogUploadForm />,
+               },
+               {
+                  path: "addNew",
+                  element: <BlogUploadForm />,
+               },
+               {
+                  path: "manageBlogs",
+                  element: <ManageAllBlogs />,
+               },
+               {
+                  path: "manageBlogs/:id",
                },
             ],
          },
