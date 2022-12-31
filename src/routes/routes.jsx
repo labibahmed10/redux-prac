@@ -41,11 +41,12 @@ const routes = createBrowserRouter([
                   element: <BlogUploadForm />,
                },
                {
-                  path: "manageBlogs",
-                  element: <ManageAllBlogs />,
+                  path: "/admin/update/:id",
+                  element: <BlogUploadForm />,
                },
                {
-                  path: "manageBlogs/:id",
+                  path: "manageBlogs",
+                  element: <ManageAllBlogs />,
                },
             ],
          },

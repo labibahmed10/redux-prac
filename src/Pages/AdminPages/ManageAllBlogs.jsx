@@ -2,7 +2,7 @@ import React from "react";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { openModal } from "../../redux/action/manageBlogActionFunc";
 import DeleteModal from "../../Components/DeleteModal";
 
@@ -12,9 +12,12 @@ const ManageAllBlogs = () => {
 
    const blogs = useSelector((state) => state?.blogs?.blogs);
    const manage = useSelector((state) => state.manage);
-   console.log(manage);
 
    let date;
+
+   const handleUpdateBlog = (blog) => {
+      navigate(`/admin/update/${blog._id}`);
+   };
 
    return (
       <div className="overflow-auto shadow-md rounded-lg">
@@ -48,7 +51,10 @@ const ManageAllBlogs = () => {
                            onClick={() => dispatch(openModal(blog))}
                         />
 
-                        <GrDocumentUpdate className="cursor-pointer" />
+                        <GrDocumentUpdate
+                           onClick={() => handleUpdateBlog(blog)}
+                           className="cursor-pointer"
+                        />
                      </td>
                   </tr>
                ))}

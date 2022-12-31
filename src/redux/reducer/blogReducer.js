@@ -1,8 +1,9 @@
 import {
    ADD_CONTENT,
-   DELETE_A_BLOG,
+   DELETE_CONTENT,
    GET_CONTENT,
    READING_HISTORY,
+   UPDATE_CONTENT,
 } from "../actionTypes/allActionTypes";
 
 const initialState = {
@@ -20,6 +21,24 @@ const blogReducer = (state = initialState, action) => {
             blogs: [...action.payload],
          };
 
+      case ADD_CONTENT:
+         return {
+            ...state,
+            blogs: [action.payload, ...state.blogs],
+         };
+
+      case DELETE_CONTENT:
+         return {
+            ...state,
+            blogs: [...state.blogs.filter((blog) => blog._id !== action.payload._id)],
+         };
+
+      case UPDATE_CONTENT:
+         return {
+            ...state,
+            // blogs: 
+         }
+
       case READING_HISTORY:
          const existing = state.history.includes(action.payload);
 
@@ -35,18 +54,6 @@ const blogReducer = (state = initialState, action) => {
          return {
             ...state,
             history: [action.payload, ...state.history],
-         };
-
-      case ADD_CONTENT:
-         return {
-            ...state,
-            blogs: [action.payload, ...state.blogs],
-         };
-
-      case DELETE_A_BLOG:
-         return {
-            ...state,
-            blogs: [...state.blogs.filter((blog) => blog._id !== action.payload._id)],
          };
 
       default:

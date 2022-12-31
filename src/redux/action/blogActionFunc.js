@@ -1,8 +1,9 @@
 import {
    ADD_CONTENT,
-   DELETE_A_BLOG,
+   DELETE_CONTENT,
    GET_CONTENT,
    READING_HISTORY,
+   UPDATE_CONTENT,
 } from "../actionTypes/allActionTypes";
 
 export const getAllBlogs = (blogs) => {
@@ -21,7 +22,14 @@ export const addANewBlog = (data) => {
 
 export const deleteABlog = (blog) => {
    return {
-      type: DELETE_A_BLOG,
+      type: DELETE_CONTENT,
+      payload: blog,
+   };
+};
+
+export const updateABlog = (blog) => {
+   return {
+      type: UPDATE_CONTENT,
       payload: blog,
    };
 };

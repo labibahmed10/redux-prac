@@ -1,11 +1,19 @@
 import { GrFormClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { updateABlog } from "../redux/action/blogActionFunc";
 import { addTagsInput, removeATag, textInputs } from "../redux/action/blogFormActionFunc";
 import ADD_CONTENT_THUNK from "../redux/thunk_middleware/ADD_CONTENT";
 
 const BlogUploadEditForm = () => {
    const dispatch = useDispatch();
-   const form = useSelector((state) => state.form);
+   const { id } = useParams();
+
+   const form = useSelector((state) => state?.form);
+   const blogs = useSelector((state) => state?.blogs?.blogs);
+
+   const updateBlog = blogs.find((blog) => blog._id === id);
+   let nayi = blogs.find((blog) => blog._id === id);
 
    const handleUploadForm = (e) => {
       e.preventDefault();
@@ -23,6 +31,7 @@ const BlogUploadEditForm = () => {
          <input
             type="text"
             name="title"
+            defaultValue={`${updateBlog ? updateBlog.title : ""}`}
             onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="w-full bg-gray-50 py-3 px-3 rounded-xl focus:outline-0 mb-6"
             id="title"
@@ -37,6 +46,7 @@ const BlogUploadEditForm = () => {
          <input
             type="url"
             name="image"
+            defaultValue={updateBlog ? updateBlog.image : ""}
             onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="w-full bg-gray-50 py-3 px-3 rounded-xl focus:outline-0 mb-6"
             id="image"
@@ -50,6 +60,7 @@ const BlogUploadEditForm = () => {
             id="text"
             rows="4"
             name="text"
+            defaultValue={updateBlog ? updateBlog.text : ""}
             onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg  focus:outline mb-6"
             placeholder="Write your thoughts here..."
@@ -78,8 +89,23 @@ const BlogUploadEditForm = () => {
             </select>
 
             <div className="mt-5 flex items-center justify-start gap-2">
-               {form.tags.length > 0 &&
-                  form.tags.map((tag, i) => (
+               {updateBlog?.tags?.length > 0 &&
+                  updateBlog?.tags?.map((tag, i) => (
+                     <div
+                        key={i}
+                        className="flex justify-center items-center w-fit p-2 rounded-lg bg-[#9ed5cb] font-semibold"
+                     >
+                        <p>{tag}</p>{" "}
+                        <GrFormClose
+                           className=""
+                           onClick={() => dispatch(removeATag(tag))}
+                           size={30}
+                        />
+                     </div>
+                  ))}
+
+               {form?.tags?.length > 0 &&
+                  form?.tags?.map((tag, i) => (
                      <div
                         key={i}
                         className="flex justify-center items-center w-fit p-2 rounded-lg bg-[#9ed5cb] font-semibold"

@@ -15,9 +15,9 @@ export const addTagsInput = (tags) => {
 };
 
 export const removeATag = (tag) => {
+   console.log(tag);
    return {
       type: REMOVE_TAG,
       payload: tag,
    };
 };
-
