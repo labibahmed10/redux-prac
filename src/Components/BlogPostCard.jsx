@@ -14,12 +14,12 @@ const BlogPostCard = ({ blog }) => {
    };
 
    return (
-      <div className="shadow-xl rounded-3xl flex flex-col text-[#445045] bg-[#c5e0dc] h-full">
+      <div className="shadow-xl rounded-3xl flex flex-col text-[#445045] bg-[#c5e0dc] h-full w-full">
          <div className="w-full">
             <img
                src={blog.image}
                alt="The pic contains some information"
-               className="object-fill rounded-t-3xl"
+               className="object-fill rounded-t-3xl h-96 w-full"
             />
          </div>
 

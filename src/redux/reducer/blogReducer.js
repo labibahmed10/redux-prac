@@ -1,9 +1,15 @@
-import { GET_CONTENT, READING_HISTORY } from "../actionTypes/allActionTypes";
+import {
+   ADD_CONTENT,
+   DELETE_A_BLOG,
+   GET_CONTENT,
+   READING_HISTORY,
+} from "../actionTypes/allActionTypes";
 
 const initialState = {
    loading: false,
    blogs: [],
    history: [],
+   deleteBlog: {},
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -26,10 +32,21 @@ const blogReducer = (state = initialState, action) => {
                ],
             };
          }
-
          return {
             ...state,
             history: [action.payload, ...state.history],
+         };
+
+      case ADD_CONTENT:
+         return {
+            ...state,
+            blogs: [action.payload, ...state.blogs],
+         };
+
+      case DELETE_A_BLOG:
+         return {
+            ...state,
+            blogs: [...state.blogs.filter((blog) => blog._id !== action.payload._id)],
          };
 
       default:

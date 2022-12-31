@@ -1,6 +1,6 @@
 import { getAllBlogs } from "../action/blogActionFunc";
 
-const fetchBlogsThunk = () => {
+const GET_CONTENT_THUNK = () => {
    return async (dispatch, getState) => {
       const response = await fetch("http://localhost:8000/api/all");
       const blogs = await response.json();
@@ -8,4 +8,4 @@ const fetchBlogsThunk = () => {
    };
 };
 
-export default fetchBlogsThunk;
+export default GET_CONTENT_THUNK;

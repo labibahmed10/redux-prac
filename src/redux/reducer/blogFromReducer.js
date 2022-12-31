@@ -1,7 +1,8 @@
-import { ADD_TAGS, TEXT_INPUT } from "../actionTypes/allActionTypes";
+import { ADD_TAGS, REMOVE_TAG, TEXT_INPUT } from "../actionTypes/allActionTypes";
 
 const initialState = {
    title: "",
+   image: "",
    text: "",
    tags: [],
 };
@@ -13,6 +14,12 @@ const blogFormReducer = (state = initialState, action) => {
             return {
                ...state,
                title: action.payload.value,
+            };
+         }
+         if (action.payload.name === "image") {
+            return {
+               ...state,
+               image: action.payload.value,
             };
          }
          return {
@@ -33,6 +40,11 @@ const blogFormReducer = (state = initialState, action) => {
             tags: [action.payload, ...state.tags],
          };
 
+      case REMOVE_TAG:
+         return {
+            ...state,
+            tags: [...state.tags.filter((tag) => tag !== action.payload)],
+         };
       default:
          return state;
    }
