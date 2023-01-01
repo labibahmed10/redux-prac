@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateABlog } from "../redux/action/blogActionFunc";
 import { addTagsInput, removeATag, textInputs } from "../redux/action/blogFormActionFunc";
 import ADD_CONTENT_THUNK from "../redux/thunk_middleware/ADD_CONTENT";
+import UPDATE_CONTENT from "../redux/thunk_middleware/UPDATE_CONTENT";
 
 const BlogUploadEditForm = () => {
    const dispatch = useDispatch();
@@ -13,11 +15,20 @@ const BlogUploadEditForm = () => {
    const blogs = useSelector((state) => state?.blogs?.blogs);
 
    const updateBlog = blogs.find((blog) => blog._id === id);
-   let nayi = blogs.find((blog) => blog._id === id);
+
+   useEffect(() => {
+      if (id) {
+         form?.tags.forEach((tag) => dispatch(removeATag(tag)));
+         dispatch(textInputs("title", updateBlog?.title));
+         dispatch(textInputs("image", updateBlog?.image));
+         dispatch(textInputs("text", updateBlog?.text));
+         updateBlog?.tags.forEach((tag) => dispatch(addTagsInput(tag)));
+      }
+   }, [id, updateBlog, dispatch]);
 
    const handleUploadForm = (e) => {
       e.preventDefault();
-      dispatch(ADD_CONTENT_THUNK(form));
+      // dispatch(ADD_CONTENT_THUNK(form));
    };
 
    return (
@@ -31,8 +42,11 @@ const BlogUploadEditForm = () => {
          <input
             type="text"
             name="title"
-            defaultValue={`${updateBlog ? updateBlog.title : ""}`}
-            onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
+            defaultValue={id ? updateBlog?.title : ""}
+            onChange={(e) => {
+               dispatch(textInputs(e.target.name, e.target.value));
+               // updateBlog?.title && againTry(e.target.name, e.target.value);
+            }}
             className="w-full bg-gray-50 py-3 px-3 rounded-xl focus:outline-0 mb-6"
             id="title"
             placeholder="Text input"
@@ -46,7 +60,7 @@ const BlogUploadEditForm = () => {
          <input
             type="url"
             name="image"
-            defaultValue={updateBlog ? updateBlog.image : ""}
+            defaultValue={id ? updateBlog?.image : ""}
             onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="w-full bg-gray-50 py-3 px-3 rounded-xl focus:outline-0 mb-6"
             id="image"
@@ -60,7 +74,7 @@ const BlogUploadEditForm = () => {
             id="text"
             rows="4"
             name="text"
-            defaultValue={updateBlog ? updateBlog.text : ""}
+            defaultValue={id ? updateBlog?.text : ""}
             onBlur={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg  focus:outline mb-6"
             placeholder="Write your thoughts here..."
@@ -89,21 +103,6 @@ const BlogUploadEditForm = () => {
             </select>
 
             <div className="mt-5 flex items-center justify-start gap-2">
-               {updateBlog?.tags?.length > 0 &&
-                  updateBlog?.tags?.map((tag, i) => (
-                     <div
-                        key={i}
-                        className="flex justify-center items-center w-fit p-2 rounded-lg bg-[#9ed5cb] font-semibold"
-                     >
-                        <p>{tag}</p>{" "}
-                        <GrFormClose
-                           className=""
-                           onClick={() => dispatch(removeATag(tag))}
-                           size={30}
-                        />
-                     </div>
-                  ))}
-
                {form?.tags?.length > 0 &&
                   form?.tags?.map((tag, i) => (
                      <div
@@ -120,17 +119,39 @@ const BlogUploadEditForm = () => {
                   ))}
             </div>
 
-            <button
-               type="submit"
-               disabled={
-                  form.text.length > 0 && form.title.length > 0 && form.tags.length > 0
-                     ? false
-                     : true
-               }
-               className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10"
-            >
-               Add New
-            </button>
+            {id ? (
+               <button
+                  type="submit"
+                  disabled={
+                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
+                  }
+                  className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
+                  onClick={(e) => {
+                     e.preventDefault();
+                     dispatch(
+                        UPDATE_CONTENT({
+                           ...updateBlog,
+                           title: form?.title,
+                           image: form?.image,
+                           text: form?.text,
+                           tags: [...form?.tags],
+                        }),
+                     );
+                  }}
+               >
+                  Update the blog
+               </button>
+            ) : (
+               <button
+                  type="submit"
+                  disabled={
+                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
+                  }
+                  className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
+               >
+                  Add Blog
+               </button>
+            )}
          </div>
       </form>
    );

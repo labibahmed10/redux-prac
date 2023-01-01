@@ -36,8 +36,11 @@ const blogReducer = (state = initialState, action) => {
       case UPDATE_CONTENT:
          return {
             ...state,
-            // blogs: 
-         }
+            blogs: [
+               action.payload,
+               ...state.blogs.filter((blog) => blog._id !== action.payload._id),
+            ],
+         };
 
       case READING_HISTORY:
          const existing = state.history.includes(action.payload);

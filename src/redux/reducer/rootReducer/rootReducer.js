@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import blogFormReducer from "../blogFromReducer";
+import blogFormReducer from "../blogFormReducer";
 import blogReducer from "../blogReducer";
 import filterReducer from "../filterReducer";
 import manageBlogReducer from "../manageBlogReducer";

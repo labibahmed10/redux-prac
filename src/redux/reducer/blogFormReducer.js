@@ -43,7 +43,7 @@ const blogFormReducer = (state = initialState, action) => {
       case REMOVE_TAG:
          return {
             ...state,
-            tags: [...state.tags.filter((tag) => tag !== action.payload)],
+            tags: state.tags.filter((tag) => tag !== action.payload),
          };
       default:
          return state;
