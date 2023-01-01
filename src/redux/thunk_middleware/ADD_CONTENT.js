@@ -1,6 +1,4 @@
-import Swal from "sweetalert2";
 import toast from "../../Components/toast";
-import Toast from "../../Components/toast";
 import { addANewBlog } from "../action/blogActionFunc";
 
 const ADD_CONTENT = (blog) => {

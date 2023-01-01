@@ -7,13 +7,11 @@ const DELETE_CONTENT = (blog) => {
          method: "DELETE",
       });
       const result = await res.json();
-      console.log(result);
-      
+
       if (result.deletedCount > 0) {
          dispatch(deleteABlog(blog));
-         toast(true, result.message);
-      } else {
-         // common ekta error show korte hbe
+      }
+      if (!result.success) {
          toast(false, result.error);
       }
    };

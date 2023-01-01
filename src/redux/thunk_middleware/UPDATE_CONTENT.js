@@ -1,3 +1,4 @@
+import toast from "../../Components/toast";
 import { updateABlog } from "../action/blogActionFunc";
 
 const UPDATE_CONTENT = (blog) => {
@@ -13,6 +14,10 @@ const UPDATE_CONTENT = (blog) => {
 
       if (data.success) {
          dispatch(updateABlog(blog));
+         toast(true, data.message);
+      }
+      if (!data.success) {
+         toast(false, data.error);
       }
    };
 };
