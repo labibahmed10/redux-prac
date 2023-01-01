@@ -1,3 +1,6 @@
+import Swal from "sweetalert2";
+import toast from "../../Components/toast";
+import Toast from "../../Components/toast";
 import { addANewBlog } from "../action/blogActionFunc";
 
 const ADD_CONTENT = (blog) => {
@@ -10,11 +13,14 @@ const ADD_CONTENT = (blog) => {
          body: JSON.stringify(blog),
       });
       const result = await res.json();
+      console.log(result);
 
       if (result.success) {
          dispatch(addANewBlog(result?.result));
-      } else {
-         // common ekta error show korte hbe
+         toast(true, result.message);
+      }
+      if (!result.success) {
+         toast(false, result.error);
       }
    };
 };

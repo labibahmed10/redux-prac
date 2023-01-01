@@ -1,3 +1,4 @@
+import toast from "../../Components/toast";
 import { deleteABlog } from "../action/blogActionFunc";
 
 const DELETE_CONTENT = (blog) => {
@@ -6,11 +7,14 @@ const DELETE_CONTENT = (blog) => {
          method: "DELETE",
       });
       const result = await res.json();
-
+      console.log(result);
+      
       if (result.deletedCount > 0) {
          dispatch(deleteABlog(blog));
+         toast(true, result.message);
       } else {
          // common ekta error show korte hbe
+         toast(false, result.error);
       }
    };
 };
