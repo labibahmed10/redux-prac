@@ -1,6 +1,6 @@
 import { addANewBlog } from "../action/blogActionFunc";
 
-const ADD_CONTENT_THUNK = (blog) => {
+const ADD_CONTENT = (blog) => {
    return async (dispatch, getState) => {
       const res = await fetch("http://localhost:8000/api/addBlog", {
          method: "POST",
@@ -19,4 +19,4 @@ const ADD_CONTENT_THUNK = (blog) => {
    };
 };
 
-export default ADD_CONTENT_THUNK;
+export default ADD_CONTENT;

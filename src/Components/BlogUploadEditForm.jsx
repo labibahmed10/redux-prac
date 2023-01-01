@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { updateABlog } from "../redux/action/blogActionFunc";
+
 import { addTagsInput, removeATag, textInputs } from "../redux/action/blogFormActionFunc";
-import ADD_CONTENT_THUNK from "../redux/thunk_middleware/ADD_CONTENT";
+import ADD_CONTENT from "../redux/thunk_middleware/ADD_CONTENT";
 import UPDATE_CONTENT from "../redux/thunk_middleware/UPDATE_CONTENT";
 
 const BlogUploadEditForm = () => {
@@ -28,7 +28,7 @@ const BlogUploadEditForm = () => {
 
    const handleUploadForm = (e) => {
       e.preventDefault();
-      // dispatch(ADD_CONTENT_THUNK(form));
+      dispatch(ADD_CONTENT(form));
    };
 
    return (
@@ -43,10 +43,7 @@ const BlogUploadEditForm = () => {
             type="text"
             name="title"
             defaultValue={id ? updateBlog?.title : ""}
-            onChange={(e) => {
-               dispatch(textInputs(e.target.name, e.target.value));
-               // updateBlog?.title && againTry(e.target.name, e.target.value);
-            }}
+            onChange={(e) => dispatch(textInputs(e.target.name, e.target.value))}
             className="w-full bg-gray-50 py-3 px-3 rounded-xl focus:outline-0 mb-6"
             id="title"
             placeholder="Text input"
@@ -122,9 +119,7 @@ const BlogUploadEditForm = () => {
             {id ? (
                <button
                   type="submit"
-                  disabled={
-                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
-                  }
+                  disabled={!form?.text?.length || !form?.title?.length || !form?.tags?.length}
                   className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
                   onClick={(e) => {
                      e.preventDefault();
@@ -144,9 +139,7 @@ const BlogUploadEditForm = () => {
             ) : (
                <button
                   type="submit"
-                  disabled={
-                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
-                  }
+                  disabled={!form?.text?.length || !form?.title?.length || !form?.tags?.length}
                   className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
                >
                   Add Blog

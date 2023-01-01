@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { openModal } from "../redux/action/manageBlogActionFunc";
-import DELETE_CONTENT_THUNK from "../redux/thunk_middleware/DELETE_CONTENT";
+import DELETE_CONTENT from "../redux/thunk_middleware/DELETE_CONTENT";
 
 const DeleteModal = () => {
    const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const DeleteModal = () => {
          }
 
          if (result.isConfirmed) {
-            dispatch(DELETE_CONTENT_THUNK(state.blog));
+            dispatch(DELETE_CONTENT(state.blog));
             dispatch(openModal({}));
          }
          if (!result.isConfirmed) {
@@ -31,8 +31,6 @@ const DeleteModal = () => {
          }
       });
    };
-
-   console.log(state);
 
    return <>{modal()}</>;
 };
