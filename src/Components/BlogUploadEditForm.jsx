@@ -24,7 +24,7 @@ const BlogUploadEditForm = () => {
          dispatch(textInputs("text", updateBlog?.text));
          updateBlog?.tags.forEach((tag) => dispatch(addTagsInput(tag)));
       }
-   }, [id, updateBlog, dispatch]);
+   }, [id, updateBlog, form?.tags, dispatch]);
 
    const handleUploadForm = (e) => {
       e.preventDefault();
@@ -119,7 +119,9 @@ const BlogUploadEditForm = () => {
             {id ? (
                <button
                   type="submit"
-                  disabled={!form?.text?.length || !form?.title?.length || !form?.tags?.length}
+                  disabled={
+                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
+                  }
                   className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
                   onClick={(e) => {
                      e.preventDefault();
@@ -139,7 +141,9 @@ const BlogUploadEditForm = () => {
             ) : (
                <button
                   type="submit"
-                  disabled={!form?.text?.length || !form?.title?.length || !form?.tags?.length}
+                  disabled={
+                     !form?.text?.length || !form?.title?.length || !form?.tags?.length
+                  }
                   className="px-5 py-3 bg-[#9ED5CB] text-white font-semibold rounded-lg mt-10 disabled:bg-[#416d65]"
                >
                   Add Blog
