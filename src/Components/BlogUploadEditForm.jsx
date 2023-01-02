@@ -24,7 +24,7 @@ const BlogUploadEditForm = () => {
          dispatch(textInputs("text", updateBlog?.text));
          updateBlog?.tags.forEach((tag) => dispatch(addTagsInput(tag)));
       }
-   }, [id, updateBlog, form?.tags, dispatch]);
+   }, [id, updateBlog, dispatch]);
 
    const handleUploadForm = (e) => {
       e.preventDefault();
