@@ -3,9 +3,12 @@ import { deleteABlog } from "../action/blogActionFunc";
 
 const DELETE_CONTENT = (blog) => {
    return async (dispatch, getState) => {
-      const res = await fetch(`http://localhost:8000/api/delete/${blog?._id}`, {
-         method: "DELETE",
-      });
+      const res = await fetch(
+         `https://blog-manage-redux.onrender.com/api/delete/${blog?._id}`,
+         {
+            method: "DELETE",
+         },
+      );
       const result = await res.json();
 
       if (result.deletedCount > 0) {
